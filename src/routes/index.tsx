@@ -13,6 +13,7 @@ export const Routes: FC = (): JSX.Element => {
             <Route path="/login" element={<>Login</>} />
             <Route element={<>Layout</>}>
                 <Route path="/" element={<>Home</>} />
+                <Route path="/chat" element={<>Home</>} />
             </Route>
             <Route path="*" element={<>Page Not Found</>} />
         </Router>
