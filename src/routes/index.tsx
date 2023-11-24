@@ -1,6 +1,6 @@
 import type { FC, JSX } from 'react';
 import { Routes as Router, Route } from 'react-router-dom';
-
+import ChatPage from '../pages/chat/ChatPage';
 /**
  * Componente donde se centralizan todas las rutas de la aplicación..
  *
@@ -13,7 +13,7 @@ export const Routes: FC = (): JSX.Element => {
             <Route path="/login" element={<>Login</>} />
             <Route element={<>Layout</>}>
                 <Route path="/" element={<>Home</>} />
-                <Route path="/chat" element={<>Home</>} />
+                <Route path="/chat" element={<ChatPage/>} />
             </Route>
             <Route path="*" element={<>Page Not Found</>} />
         </Router>
