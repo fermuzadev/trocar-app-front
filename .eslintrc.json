@@ -1,0 +1,25 @@
+{
+    "root": true,
+    "env": { "browser": true, "es2020": true },
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react-hooks/recommended"
+    ],
+    "globals": {
+        "React": "readonly"
+    },
+    "ignorePatterns": ["dist", ".eslint.json", "commitlint.config.js"],
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["react-refresh"],
+    "rules": {
+        "no-unused-vars": [
+            1,
+            { "args": "after-used", "argsIgnorePattern": "^_" }
+        ],
+        "react-refresh/only-export-components": [
+            "warn",
+            { "allowConstantExport": true }
+        ]
+    }
+}
