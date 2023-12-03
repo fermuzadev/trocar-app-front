@@ -1,2 +1,2 @@
 // Variable de muestra.
-export const ab = '';
+export { default as HomeHeader } from './HomeHeader';

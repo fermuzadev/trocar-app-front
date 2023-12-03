@@ -1,6 +1,13 @@
 import type { FC, JSX } from 'react';
-import { Routes as Router, Route } from 'react-router-dom';
-import ChatPage from '../pages/chat/ChatPage';
+import { Routes as AppRouter, Route } from 'react-router-dom';
+
+// import { AuthRoutes } from '../pages/auth/routes';
+
+// import { MainRoute } from './main.route';
+// import { MainLayout } from '../components';
+import { SidebarLayout } from '../components/layouts/sidebar_layout';
+import { Home } from '../pages';
+
 /**
  * Componente donde se centralizan todas las rutas de la aplicación..
  *
@@ -8,14 +15,15 @@ import ChatPage from '../pages/chat/ChatPage';
  */
 export const Routes: FC = (): JSX.Element => {
     return (
-        <Router>
-            <Route path="/register" element={<>Register</>} />
-            <Route path="/login" element={<>Login</>} />
-            <Route element={<>Layout</>}>
-                <Route path="/" element={<>Home</>} />
-                <Route path="/chat" element={<ChatPage/>} />
-            </Route>
-            <Route path="*" element={<>Page Not Found</>} />
-        </Router>
+        <div className="flex">
+            <SidebarLayout></SidebarLayout>
+            <AppRouter>
+                {/* <AuthRoutes /> */}
+                <Route path="/" element={<Home></Home>} />
+
+                {/* <Route path="/" element={<MainLayout></MainLayout>}></Route> */}
+                <Route path="*" element={<>Page Not Found</>} />
+            </AppRouter>
+        </div>
     );
 };

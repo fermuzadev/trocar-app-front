@@ -1,28 +1,48 @@
-// store/index.ts
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import sidebarReducer from '../components/layouts/sidebar_layout/store/slice/sidebarSlice.js';
+import {
+    persistStore,
+    persistReducer,
+    FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER,
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
-import { configureStore } from '@reduxjs/toolkit';
-import chatReducer from './chatSlice';
-
-const store = configureStore({
-  reducer: {
-    chat: chatReducer,
-    // Otros reducers según sea necesario
-  },
+const rootReducer = combineReducers({
+    sidebar: sidebarReducer,
 });
 
+const persistConfig = {
+    key: 'root',
+    version: 1,
+    storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+export const store = configureStore({
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: [
+                    FLUSH,
+                    REHYDRATE,
+                    PAUSE,
+                    PERSIST,
+                    PURGE,
+                    REGISTER,
+                ],
+            },
+        }),
+});
+
+// Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
+// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;
-
-export default store;
-
-
-
-
-
-
-
-
-
-
-// Variable de muestra.
-export const a = '';
+export const persistor = persistStore(store);

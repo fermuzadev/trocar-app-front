@@ -1,2 +1,1 @@
-// Variable de muestra.
-export const a = '';
+export * from './layouts';
